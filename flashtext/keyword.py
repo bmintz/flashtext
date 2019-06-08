@@ -3,6 +3,10 @@ import string
 import io
 import re
 
+try:
+    from sys import intern
+except ImportError:
+    pass
 
 class KeywordProcessor(object):
     """KeywordProcessor
@@ -114,7 +118,7 @@ class KeywordProcessor(object):
             return current_dict[self._keyword]
         raise KeyError(word)
 
-    def __setitem__(self, keyword, clean_name=None):
+    def __setitem__(self, keyword, clean_name=intern('not provided')):
         """To add keyword to the dictionary
         pass the keyword and the clean name it maps to.
 
@@ -130,10 +134,10 @@ class KeywordProcessor(object):
             >>> keyword_processor['Big Apple'] = 'New York'
         """
         status = False
-        if not clean_name and keyword:
+        if clean_name is intern('not provided') and keyword:
             clean_name = keyword
 
-        if keyword and clean_name:
+        if keyword and clean_name is not intern('not provided'):
             if not self.case_sensitive:
                 keyword = keyword.lower()
             current_dict = self.keyword_trie_dict
