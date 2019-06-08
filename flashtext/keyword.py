@@ -120,6 +120,7 @@ class KeywordProcessor(object):
                 break
         if self._keyword in current_dict and len_covered == len(word):
             return current_dict[self._keyword]
+        raise KeyError(word)
 
     def __setitem__(self, keyword, clean_name=None):
         """To add keyword to the dictionary
