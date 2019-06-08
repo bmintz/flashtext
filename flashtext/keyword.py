@@ -149,6 +149,13 @@ class KeywordProcessor(object):
             current_dict[self._keyword] = clean_name
         return status
 
+    def setdefault(self, keyword, default):
+        try:
+            return self[keyword]
+        except KeyError:
+            self[keyword] = ret = default
+            return default
+
     def __delitem__(self, keyword):
         """To remove keyword from the dictionary
         pass the keyword and the clean name it maps to.
