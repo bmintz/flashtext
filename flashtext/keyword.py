@@ -41,8 +41,7 @@ class KeywordProcessor(object):
                 Defaults to False
         """
         self._keyword = object()
-        self._white_space_chars = set(['.', '\t', '\n', '\a', ' ', ','])
-        self.keyword_trie_dict = dict()
+        self.keyword_trie_dict = {}
         self.case_sensitive = case_sensitive
         self._terms_in_trie = 0
 
